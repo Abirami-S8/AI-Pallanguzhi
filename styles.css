@@ -1,0 +1,324 @@
+/* Traditional Tamil Pallanguzhi Game Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans Tamil', Arial, sans-serif;
+    background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #2F1B14;
+}
+
+.game-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 248, 220, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 3px solid #8B4513;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #8B4513;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #A0522D;
+    font-style: italic;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.difficulty-selector label {
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.difficulty-selector select {
+    padding: 8px 15px;
+    border: 2px solid #8B4513;
+    border-radius: 8px;
+    background: white;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.game-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.game-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #8B4513;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.game-buttons button:hover {
+    background: #A0522D;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.game-buttons button:active {
+    transform: translateY(0);
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(139, 69, 19, 0.1);
+    border-radius: 15px;
+    border: 2px solid #8B4513;
+}
+
+.player-score, .ai-score {
+    text-align: center;
+    flex: 1;
+}
+
+.player-score h3, .ai-score h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #8B4513;
+}
+
+.score {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #D2691E;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.game-board {
+    background: linear-gradient(45deg, #8B4513, #A0522D);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: 4px solid #654321;
+}
+
+.ai-row, .player-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.pit {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #DEB887, #CD853F, #8B7355);
+    border: 3px solid #654321;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2F1B14;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.pit::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 30%;
+    height: 30%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.player-pit:hover {
+    transform: translateY(-3px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: radial-gradient(circle at 30% 30%, #F5DEB3, #DEB887, #CD853F);
+}
+
+.player-pit.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.ai-pit {
+    cursor: default;
+    opacity: 0.8;
+}
+
+.pit.highlighted {
+    animation: pulse 1s infinite;
+    border-color: #FFD700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.pit.capturing {
+    animation: capture 0.8s ease-in-out;
+}
+
+@keyframes capture {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); background: #FFD700; }
+    100% { transform: scale(1); }
+}
+
+.game-status {
+    text-align: center;
+    padding: 20px;
+    background: rgba(139, 69, 19, 0.1);
+    border-radius: 15px;
+    border: 2px solid #8B4513;
+}
+
+#current-player {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #8B4513;
+    margin-bottom: 15px;
+}
+
+#game-message {
+    font-size: 1.2rem;
+    color: #A0522D;
+    margin-bottom: 15px;
+    min-height: 30px;
+}
+
+.ai-explanation {
+    background: rgba(210, 105, 30, 0.1);
+    border: 2px solid #D2691E;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #8B4513;
+}
+
+.ai-explanation h4 {
+    color: #D2691E;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.hint-message {
+    background: rgba(255, 215, 0, 0.2);
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    color: #8B4513;
+    font-weight: 600;
+}
+
+.hidden {
+    display: none;
+}
+
+.game-over {
+    background: rgba(255, 215, 0, 0.3);
+    border: 3px solid #FFD700;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #8B4513;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 20px;
+    }
+    
+    .game-header h1 {
+        font-size: 2rem;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .game-buttons {
+        justify-content: center;
+    }
+    
+    .pit {
+        width: 60px;
+        height: 60px;
+        font-size: 1.2rem;
+    }
+    
+    .ai-row, .player-row {
+        gap: 8px;
+    }
+    
+    .score-board {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pit {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .ai-row, .player-row {
+        gap: 5px;
+    }
+    
+    .game-board {
+        padding: 15px;
+    }
+}

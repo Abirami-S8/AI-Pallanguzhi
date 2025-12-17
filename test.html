@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pallanguzhi Game Test</title>
+</head>
+<body>
+    <h1>Testing Pallanguzhi Game Logic</h1>
+    <div id="test-results"></div>
+    
+    <script src="js/gameLogic.js"></script>
+    <script src="js/aiPlayer.js"></script>
+    <script>
+        // Simple test to verify game logic
+        function runTests() {
+            const results = [];
+            
+            // Test 1: Game initialization
+            const game = new PallanguzhiGame();
+            results.push(`✓ Game initialized: Board has ${game.board.length} pits`);
+            results.push(`✓ Starting stones: ${game.board.reduce((a,b) => a+b, 0)} total stones`);
+            
+            // Test 2: Valid move check
+            const validMove = game.isValidMove(0);
+            results.push(`✓ Valid move check: ${validMove ? 'Working' : 'Failed'}`);
+            
+            // Test 3: AI initialization
+            const ai = new PallanguzhiAI('medium');
+            results.push(`✓ AI initialized with difficulty: ${ai.difficulty}`);
+            
+            // Test 4: AI move selection
+            const aiMove = ai.chooseBestMove(game);
+            results.push(`✓ AI can choose moves: ${aiMove.move !== null ? 'Yes' : 'No'}`);
+            
+            // Test 5: Make a move
+            const moveResult = game.makeMove(0);
+            results.push(`✓ Move execution: ${moveResult.success ? 'Success' : 'Failed'}`);
+            
+            // Display results
+            document.getElementById('test-results').innerHTML = 
+                '<h2>Test Results:</h2><ul><li>' + results.join('</li><li>') + '</li></ul>';
+        }
+        
+        // Run tests when page loads
+        window.onload = runTests;
+    </script>
+</body>
+</html>

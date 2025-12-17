@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>பல்லாங்குழி - Pallanguzhi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>பல்லாங்குழி</h1>
+            <p class="subtitle">Traditional Tamil Board Game</p>
+        </header>
+
+        <div class="game-controls">
+            <div class="difficulty-selector">
+                <label for="difficulty">கடினத்தன்மை (Difficulty):</label>
+                <select id="difficulty">
+                    <option value="easy">எளிது (Easy)</option>
+                    <option value="medium" selected>நடுத்தர (Medium)</option>
+                    <option value="hard">கடினம் (Hard)</option>
+                </select>
+            </div>
+            
+            <div class="game-buttons">
+                <button id="new-game">புதிய விளையாட்டு (New Game)</button>
+                <button id="hint-btn">குறிப்பு (Hint)</button>
+                <button id="ai-explanation-toggle">AI விளக்கம் (AI Explanation)</button>
+            </div>
+        </div>
+
+        <div class="score-board">
+            <div class="player-score">
+                <h3>நீங்கள் (You)</h3>
+                <div class="score" id="player-score">0</div>
+            </div>
+            <div class="ai-score">
+                <h3>கணினி (AI)</h3>
+                <div class="score" id="ai-score">0</div>
+            </div>
+        </div>
+
+        <div class="game-board">
+            <!-- AI Row (Top) -->
+            <div class="ai-row">
+                <div class="pit ai-pit" data-pit="13"></div>
+                <div class="pit ai-pit" data-pit="12"></div>
+                <div class="pit ai-pit" data-pit="11"></div>
+                <div class="pit ai-pit" data-pit="10"></div>
+                <div class="pit ai-pit" data-pit="9"></div>
+                <div class="pit ai-pit" data-pit="8"></div>
+                <div class="pit ai-pit" data-pit="7"></div>
+            </div>
+            
+            <!-- Player Row (Bottom) -->
+            <div class="player-row">
+                <div class="pit player-pit" data-pit="0"></div>
+                <div class="pit player-pit" data-pit="1"></div>
+                <div class="pit player-pit" data-pit="2"></div>
+                <div class="pit player-pit" data-pit="3"></div>
+                <div class="pit player-pit" data-pit="4"></div>
+                <div class="pit player-pit" data-pit="5"></div>
+                <div class="pit player-pit" data-pit="6"></div>
+            </div>
+        </div>
+
+        <div class="game-status">
+            <div id="current-player">உங்கள் முறை (Your Turn)</div>
+            <div id="game-message"></div>
+            <div id="ai-explanation" class="ai-explanation hidden"></div>
+            <div id="hint-message" class="hint-message hidden"></div>
+        </div>
+    </div>
+
+    <script src="js/gameLogic.js"></script>
+    <script src="js/aiPlayer.js"></script>
+    <script src="js/gameUI.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
